@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notification_app/constant/color.dart';
+import 'package:notification_app/constant/sizedbox.dart';
 import 'package:notification_app/notification_helper.dart';
 import 'package:notification_app/widget/cards.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -15,7 +16,7 @@ void main() async {
   if (await Permission.scheduleExactAlarm.isDenied) {
     await Permission.scheduleExactAlarm.request();
   }
-  
+
   runApp(const MyApp());
 }
 
@@ -60,38 +61,52 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: bg,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-                onTap: () {
-                  NotificationHelper.scheduleNotification(
-                      context, 'BREAKFAST', 'Time for breakfast',
-                      (time) => _updatedTime('BREAKFAST', time));
-                },
-                child: Cards(
-                  text: 'BREAKFAST', time: bTime,
-                )),
-            GestureDetector(
-                onTap: () {
-                  NotificationHelper.scheduleNotification(
-                      context, 'LUNCH', 'Time for lunch',
-                      (time) => _updatedTime('LUNCH', time));
-                },
-                child: Cards(
-                  text: 'LUNCH', time: lTime,
-                )),
-            GestureDetector(
-                onTap: () {
-                  NotificationHelper.scheduleNotification(
-                      context, 'DINNER', 'Time for dinner',
-                      (time) => _updatedTime('DINNER', time));
-                },
-                child: Cards(
-                  text: 'DINNER', time: dTime,
-                ))
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    NotificationHelper.scheduleNotification(
+                        context,
+                        'BREAKFAST',
+                        'Time for breakfast',
+                        (time) => _updatedTime('BREAKFAST', time));
+                  },
+                  child: Cards(
+                    text: 'BREAKFAST',
+                    time: bTime,
+                  )),
+              sb,
+              GestureDetector(
+                  onTap: () {
+                    NotificationHelper.scheduleNotification(
+                        context,
+                        'LUNCH',
+                        'Time for lunch',
+                        (time) => _updatedTime('LUNCH', time));
+                  },
+                  child: Cards(
+                    text: 'LUNCH',
+                    time: lTime,
+                  )),
+              sb,
+              GestureDetector(
+                  onTap: () {
+                    NotificationHelper.scheduleNotification(
+                        context,
+                        'DINNER',
+                        'Time for dinner',
+                        (time) => _updatedTime('DINNER', time));
+                  },
+                  child: Cards(
+                    text: 'DINNER',
+                    time: dTime,
+                  ))
+            ],
+          ),
         )
         // FilledButton(
         //     onPressed: () {
